@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tauri Admin Theme - Modern Database Management</title>
+    <title>Translators Pro - Translation Booking Platform</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -176,6 +176,9 @@ body {
 
 .content-header {
   margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .content-header h2 {
@@ -262,6 +265,11 @@ body {
   background-color: #0DA271;
 }
 
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+
 /* Tables */
 .table {
   width: 100%;
@@ -316,17 +324,52 @@ input:focus, select:focus, textarea:focus {
   box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
 }
 
-/* Code Editor */
-.code-editor {
-  font-family: 'Fira Code', monospace;
-  background-color: var(--background);
-  padding: 1rem;
-  border-radius: 0.375rem;
-  border: 1px solid var(--border);
-  overflow-x: auto;
-  margin: 1rem 0;
-  font-size: 0.875rem;
-  line-height: 1.5;
+/* Status badges */
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-confirmed {
+  background-color: #D1FAE5;
+  color: #065F46;
+}
+
+.status-pending {
+  background-color: #FEF3C7;
+  color: #92400E;
+}
+
+.status-completed {
+  background-color: #DBEAFE;
+  color: #1E40AF;
+}
+
+.status-urgent {
+  background-color: #FEE2E2;
+  color: #B91C1C;
+}
+
+/* Grid */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
 }
 
 /* Utility Classes */
@@ -335,14 +378,9 @@ input:focus, select:focus, textarea:focus {
 .text-error { color: var(--error); }
 .text-info { color: var(--info); }
 
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
 .mt-4 { margin-top: 1rem; }
 .mr-2 { margin-right: 0.5rem; }
+.mb-2 { margin-bottom: 0.5rem; }
 
 /* Theme Toggle */
 .theme-toggle {
@@ -374,6 +412,12 @@ input:focus, select:focus, textarea:focus {
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .sidebar {
     width: 80px;
@@ -393,8 +437,14 @@ input:focus, select:focus, textarea:focus {
     font-size: 1.25rem;
   }
   
-  .grid-2 {
+  .grid-2, .grid-3, .grid-4 {
     grid-template-columns: 1fr;
+  }
+  
+  .content-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 }
 </style>
@@ -405,34 +455,34 @@ input:focus, select:focus, textarea:focus {
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-group">
-            <div class="sidebar-header">DATABASES</div>
+            <div class="sidebar-header">NAVIGATION</div>
             <a href="#" class="sidebar-item active">
-                <i class="fas fa-database"></i> <span>Production DB</span>
+                <i class="fas fa-home"></i> <span>Dashboard</span>
             </a>
             <a href="#" class="sidebar-item">
-                <i class="fas fa-database"></i> <span>Backup DB</span>
+                <i class="fas fa-calendar"></i> <span>Bookings</span>
             </a>
             <a href="#" class="sidebar-item">
-                <i class="fas fa-server"></i> <span>Local Server</span>
+                <i class="fas fa-users"></i> <span>Translators</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="fas fa-building"></i> <span>Clients</span>
             </a>
         </div>
         
         <div class="sidebar-group">
-            <div class="sidebar-header">TOOLS</div>
+            <div class="sidebar-header">MANAGE</div>
             <a href="#" class="sidebar-item">
-                <i class="fas fa-search"></i> <span>Query</span>
+                <i class="fas fa-gavel"></i> <span>Tenders</span>
             </a>
             <a href="#" class="sidebar-item">
-                <i class="fas fa-table"></i> <span>Tables</span>
+                <i class="fas fa-file-contract"></i> <span>Contracts</span>
             </a>
             <a href="#" class="sidebar-item">
-                <i class="fas fa-chart-bar"></i> <span>Statistics</span>
+                <i class="fas fa-money-bill-wave"></i> <span>Invoices</span>
             </a>
             <a href="#" class="sidebar-item">
-                <i class="fas fa-users"></i> <span>Users</span>
-            </a>
-            <a href="#" class="sidebar-item">
-                <i class="fas fa-history"></i> <span>History</span>
+                <i class="fas fa-chart-line"></i> <span>Reports</span>
             </a>
         </div>
         
@@ -444,6 +494,9 @@ input:focus, select:focus, textarea:focus {
             <a href="#" class="sidebar-item">
                 <i class="fas fa-palette"></i> <span>Themes</span>
             </a>
+            <a href="#" class="sidebar-item">
+                <i class="fas fa-question-circle"></i> <span>Help</span>
+            </a>
         </div>
     </div>
 
@@ -451,13 +504,13 @@ input:focus, select:focus, textarea:focus {
     <div class="content-area">
         <!-- Toolbar -->
         <div class="toolbar">
-            <h1><i class="fas fa-database"></i> Tauri Admin Pro</h1>
+            <h1><i class="fas fa-language"></i> Translators Pro</h1>
             <div class="toolbar-actions">
                 <button class="btn btn-secondary">
-                    <i class="fas fa-sync-alt"></i> Refresh
+                    <i class="fas fa-bell"></i>
                 </button>
                 <button class="btn btn-primary">
-                    <i class="fas fa-plus"></i> New Connection
+                    <i class="fas fa-plus"></i> New Booking
                 </button>
                 <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
@@ -468,164 +521,280 @@ input:focus, select:focus, textarea:focus {
         <!-- Main Content -->
         <div class="main-content">
             <div class="content-header">
-                <h2>Database Overview: Production DB</h2>
+                <h2>Translation Dashboard</h2>
+                <div>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
             </div>
 
+            <!-- Stats Overview -->
+            <div class="grid-4 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <div style="color: var(--text-secondary); font-size: 0.875rem;">Active Bookings</div>
+                                <div style="font-size: 1.875rem; font-weight: 700;">12</div>
+                            </div>
+                            <div style="background: #E0F2FE; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-calendar-check" style="color: #0EA5E9; font-size: 1.5rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <div style="color: var(--text-secondary); font-size: 0.875rem;">Available Translators</div>
+                                <div style="font-size: 1.875rem; font-weight: 700;">24</div>
+                            </div>
+                            <div style="background: #D1FAE5; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-users" style="color: #10B981; font-size: 1.5rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <div style="color: var(--text-secondary); font-size: 0.875rem;">Pending Tenders</div>
+                                <div style="font-size: 1.875rem; font-weight: 700;">5</div>
+                            </div>
+                            <div style="background: #FEF3C7; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-gavel" style="color: #F59E0B; font-size: 1.5rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <div style="color: var(--text-secondary); font-size: 0.875rem;">Revenue (SEK)</div>
+                                <div style="font-size: 1.875rem; font-weight: 700;">86.5K</div>
+                            </div>
+                            <div style="background: #E0F2FE; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-money-bill-wave" style="color: #2563EB; font-size: 1.5rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Bookings -->
             <div class="card">
                 <div class="card-header">
-                    <span>Database Information</span>
-                    <div>
-                        <button class="btn btn-secondary btn-sm">
-                            <i class="fas fa-download"></i> Export
-                        </button>
-                    </div>
+                    <span>Recent Bookings</span>
+                    <button class="btn btn-sm btn-secondary">View All</button>
                 </div>
-                <div class="card-body">
-                    <div class="section">
-                        <h3 class="section-title">Statistics</h3>
-                        <div class="table-container">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Metric</th>
-                                        <th>Value</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Size</td>
-                                        <td>250 MB</td>
-                                        <td><span class="text-success"><i class="fas fa-check-circle"></i> Optimal</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tables</td>
-                                        <td>18</td>
-                                        <td><span class="text-success"><i class="fas fa-check-circle"></i> Good</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Active Queries</td>
-                                        <td>3</td>
-                                        <td><span class="text-info"><i class="fas fa-info-circle"></i> Normal</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Uptime</td>
-                                        <td>12 days, 4:32:11</td>
-                                        <td><span class="text-success"><i class="fas fa-check-circle"></i> Stable</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="section">
-                        <h3 class="section-title">Quick Query</h3>
-                        <div class="code-editor">
-                            SELECT * FROM users WHERE active = true ORDER BY created_at DESC;
-                        </div>
-                        <button class="btn btn-success">
-                            <i class="fas fa-play"></i> Execute Query
-                        </button>
-                        <button class="btn btn-secondary">
-                            <i class="fas fa-save"></i> Save Query
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">Data Entry Form</div>
-                <div class="card-body">
-                    <div class="grid-2">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" placeholder="Enter full name">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" placeholder="Enter email address">
-                        </div>
-                        <div class="form-group">
-                            <label for="role">Role</label>
-                            <select id="role">
-                                <option value="admin">Administrator</option>
-                                <option value="user">User</option>
-                                <option value="guest">Guest</option>
-                                <option value="editor">Editor</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="status">Status</label>
-                            <select id="status">
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                                <option value="pending">Pending</option>
-                                <option value="suspended">Suspended</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="notes">Notes</label>
-                        <textarea id="notes" rows="3" placeholder="Additional information"></textarea>
-                    </div>
-                    <div class="mt-4">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-save"></i> Save Record
-                        </button>
-                        <button class="btn btn-secondary">
-                            <i class="fas fa-times"></i> Cancel
-                        </button>
-                        <button class="btn btn-secondary">
-                            <i class="fas fa-plus"></i> Add Another
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-header">Recent Activity</div>
                 <div class="card-body">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Time</th>
-                                <th>User</th>
-                                <th>Action</th>
-                                <th>Object</th>
+                                <th>Client</th>
+                                <th>Translator</th>
+                                <th>Language Pair</th>
+                                <th>Date & Time</th>
+                                <th>Type</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>12:45 PM</td>
-                                <td>admin@example.com</td>
-                                <td>SELECT</td>
-                                <td>users table</td>
-                                <td><span class="text-success">Success</span></td>
+                                <td>Stockholm Law AB</td>
+                                <td>Ahmed Mansour</td>
+                                <td>Arabic ↔ Swedish</td>
+                                <td>Sep 10, 2023 · 10:00-12:00</td>
+                                <td>Legal Meeting</td>
+                                <td><span class="status-badge status-confirmed">Confirmed</span></td>
                             </tr>
                             <tr>
-                                <td>12:30 PM</td>
-                                <td>jane@example.com</td>
-                                <td>INSERT</td>
-                                <td>orders table</td>
-                                <td><span class="text-success">Success</span></td>
+                                <td>Karolinska Hospital</td>
+                                <td>Lisa Berg</td>
+                                <td>Swedish ↔ English</td>
+                                <td>Sep 12, 2023 · 14:00-16:00</td>
+                                <td>Medical</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
                             </tr>
                             <tr>
-                                <td>12:15 PM</td>
-                                <td>john@example.com</td>
-                                <td>UPDATE</td>
-                                <td>products table</td>
-                                <td><span class="text-warning">Warning</span></td>
+                                <td>Migrationsverket</td>
+                                <td>Omar Ali</td>
+                                <td>Arabic ↔ Swedish</td>
+                                <td>Sep 15, 2023 · 09:00-11:00</td>
+                                <td>Legal Document</td>
+                                <td><span class="status-badge status-completed">Completed</span></td>
                             </tr>
                             <tr>
-                                <td>11:50 AM</td>
-                                <td>admin@example.com</td>
-                                <td>DELETE</td>
-                                <td>logs table</td>
-                                <td><span class="text-error">Failed</span></td>
+                                <td>Ericsson AB</td>
+                                <td>Emma Johansson</td>
+                                <td>English ↔ Swedish</td>
+                                <td>Sep 18, 2023 · 13:00-15:00</td>
+                                <td>Technical</td>
+                                <td><span class="status-badge status-urgent">Urgent</span></td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <!-- Available Translators -->
+                <div class="card">
+                    <div class="card-header">
+                        <span>Available Translators</span>
+                        <button class="btn btn-sm btn-secondary">Filter</button>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Specialization</th>
+                                    <th>Languages</th>
+                                    <th>Rate (SEK/h)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ahmed Mansour</td>
+                                    <td>Legal</td>
+                                    <td>AR ↔ SV</td>
+                                    <td>850</td>
+                                </tr>
+                                <tr>
+                                    <td>Lisa Berg</td>
+                                    <td>Medical</td>
+                                    <td>EN ↔ SV</td>
+                                    <td>750</td>
+                                </tr>
+                                <tr>
+                                    <td>Omar Ali</td>
+                                    <td>General</td>
+                                    <td>AR ↔ SV</td>
+                                    <td>500</td>
+                                </tr>
+                                <tr>
+                                    <td>Emma Johansson</td>
+                                    <td>Technical</td>
+                                    <td>EN ↔ SV</td>
+                                    <td>800</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Recent Tenders -->
+                <div class="card">
+                    <div class="card-header">
+                        <span>Active Tenders</span>
+                        <button class="btn btn-sm btn-secondary">View All</button>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Client</th>
+                                    <th>Category</th>
+                                    <th>Deadline</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Migrationsverket</td>
+                                    <td>Legal</td>
+                                    <td>Sep 15, 2023</td>
+                                    <td>70,000 SEK</td>
+                                </tr>
+                                <tr>
+                                    <td>Karolinska Hospital</td>
+                                    <td>Medical</td>
+                                    <td>Sep 20, 2023</td>
+                                    <td>45,000 SEK</td>
+                                </tr>
+                                <tr>
+                                    <td>Stockholm Court</td>
+                                    <td>Legal</td>
+                                    <td>Sep 25, 2023</td>
+                                    <td>62,000 SEK</td>
+                                </tr>
+                                <tr>
+                                    <td>Ericsson AB</td>
+                                    <td>Technical</td>
+                                    <td>Oct 01, 2023</td>
+                                    <td>88,000 SEK</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Booking Form -->
+            <div class="card">
+                <div class="card-header">Quick Booking</div>
+                <div class="card-body">
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label for="client">Client</label>
+                            <select id="client">
+                                <option value="">Select Client</option>
+                                <option value="stockholm-law">Stockholm Law AB</option>
+                                <option value="karolinska">Karolinska Hospital</option>
+                                <option value="migrationsverket">Migrationsverket</option>
+                                <option value="ericsson">Ericsson AB</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="language-pair">Language Pair</label>
+                            <select id="language-pair">
+                                <option value="">Select Languages</option>
+                                <option value="ar-sv">Arabic ↔ Swedish</option>
+                                <option value="en-sv">English ↔ Swedish</option>
+                                <option value="so-sv">Somali ↔ Swedish</option>
+                                <option value="es-sv">Spanish ↔ Swedish</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="specialization">Specialization</label>
+                            <select id="specialization">
+                                <option value="">Select Type</option>
+                                <option value="legal">Legal</option>
+                                <option value="medical">Medical</option>
+                                <option value="technical">Technical</option>
+                                <option value="business">Business</option>
+                                <option value="general">General</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Time</label>
+                            <input type="time" id="time">
+                        </div>
+                        <div class="form-group">
+                            <label for="duration">Duration (hours)</label>
+                            <input type="number" id="duration" min="1" value="2">
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-search"></i> Find Translators
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Clear
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
