@@ -3,860 +3,370 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Translators Pro - Translation Booking Platform</title>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-</head>
-<style>
-/* Modern Tailwind-inspired Color System */
-:root {
-  /* Primary Colors */
-  --primary: #2563EB;
-  --primary-hover: #1D4ED8;
-  --primary-gradient: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
-  
-  /* Secondary Colors */
-  --accent: #60A5FA;
-  --accent-hover: #3B82F6;
-  
-  /* Neutral Colors */
-  --background: #F9FAFB;
-  --surface: #FFFFFF;
-  --border: #E5E7EB;
-  --text-primary: #1F2937;
-  --text-secondary: #374151;
-  
-  /* Semantic Colors */
-  --success: #10B981;
-  --warning: #F59E0B;
-  --error: #EF4444;
-  --info: #3B82F6;
-  
-  /* UI Colors */
-  --hover: #F3F4F6;
-  --selected: #E0F2FE;
-  --toolbar: #FFFFFF;
-  --sidebar: #F9FAFB;
-  
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
-
-/* Dark Theme */
-[data-theme="dark"] {
-  --background: #111827;
-  --surface: #1F2937;
-  --text-primary: #F9FAFB;
-  --text-secondary: #D1D5DB;
-  --border: #374151;
-  --hover: #374151;
-  --selected: #1E40AF;
-  --toolbar: #1F2937;
-  --sidebar: #111827;
-}
-
-/* Base Styles */
-* {
-  box-sizing: border-box;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--background);
-  color: var(--text-primary);
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
-}
-
-/* Layout */
-.app-container {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.sidebar {
-  background-color: var(--sidebar);
-  width: 280px;
-  height: 100vh;
-  padding: 1.5rem 0;
-  border-right: 1px solid var(--border);
-  overflow-y: auto;
-  box-shadow: var(--shadow-sm);
-}
-
-.content-area {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  overflow: hidden;
-}
-
-/* Toolbar */
-.toolbar {
-  background-color: var(--toolbar);
-  color: var(--text-primary);
-  padding: 1rem 1.5rem;
-  display: flex;
-  align-items: center;
-  box-shadow: var(--shadow-sm);
-  border-bottom: 1px solid var(--border);
-}
-
-.toolbar h1 {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.toolbar-actions {
-  margin-left: auto;
-  display: flex;
-  gap: 0.75rem;
-}
-
-/* Sidebar */
-.sidebar-group {
-  margin-bottom: 1.5rem;
-}
-
-.sidebar-header {
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.sidebar-item {
-  padding: 0.75rem 1.5rem 0.75rem 2.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  color: var(--text-primary);
-  text-decoration: none;
-  font-weight: 500;
-  border-left: 3px solid transparent;
-}
-
-.sidebar-item:hover {
-  background-color: var(--hover);
-}
-
-.sidebar-item.active {
-  background-color: var(--selected);
-  color: var(--primary);
-  border-left-color: var(--primary);
-}
-
-.sidebar-item i {
-  margin-right: 0.75rem;
-  width: 20px;
-  text-align: center;
-}
-
-/* Main Content */
-.main-content {
-  padding: 1.5rem;
-  flex-grow: 1;
-  overflow-y: auto;
-}
-
-.content-header {
-  margin-bottom: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.content-header h2 {
-  margin: 0;
-  color: var(--text-primary);
-  font-weight: 600;
-  font-size: 1.5rem;
-}
-
-/* Cards */
-.card {
-  background-color: var(--surface);
-  border-radius: 0.5rem;
-  box-shadow: var(--shadow-sm);
-  margin-bottom: 1.5rem;
-  overflow: hidden;
-  border: 1px solid var(--border);
-}
-
-.card-header {
-  padding: 1rem 1.5rem;
-  background-color: var(--surface);
-  border-bottom: 1px solid var(--border);
-  font-weight: 600;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.card-body {
-  padding: 1.5rem;
-}
-
-/* Buttons */
-.btn {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: all 0.2s;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.btn:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
-
-.btn:active {
-  transform: translateY(0);
-}
-
-.btn-primary {
-  background: var(--primary-gradient);
-  color: white;
-}
-
-.btn-primary:hover {
-  background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%);
-}
-
-.btn-secondary {
-  background-color: var(--surface);
-  color: var(--text-primary);
-  border: 1px solid var(--border);
-}
-
-.btn-secondary:hover {
-  background-color: var(--hover);
-}
-
-.btn-success {
-  background-color: var(--success);
-  color: white;
-}
-
-.btn-success:hover {
-  background-color: #0DA271;
-}
-
-.btn-sm {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-}
-
-/* Tables */
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.875rem;
-}
-
-.table th, .table td {
-  padding: 0.75rem 1rem;
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-}
-
-.table th {
-  background-color: var(--background);
-  color: var(--text-secondary);
-  font-weight: 500;
-  position: sticky;
-  top: 0;
-}
-
-.table tr:hover {
-  background-color: var(--hover);
-}
-
-/* Forms */
-.form-group {
-  margin-bottom: 1rem;
-}
-
-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: 0.375rem;
-  font-family: inherit;
-  font-size: 0.875rem;
-  background-color: var(--surface);
-  color: var(--text-primary);
-}
-
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
-}
-
-/* Status badges */
-.status-badge {
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.status-confirmed {
-  background-color: #D1FAE5;
-  color: #065F46;
-}
-
-.status-pending {
-  background-color: #FEF3C7;
-  color: #92400E;
-}
-
-.status-completed {
-  background-color: #DBEAFE;
-  color: #1E40AF;
-}
-
-.status-urgent {
-  background-color: #FEE2E2;
-  color: #B91C1C;
-}
-
-/* Grid */
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1rem;
-}
-
-.grid-4 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 1rem;
-}
-
-/* Utility Classes */
-.text-success { color: var(--success); }
-.text-warning { color: var(--warning); }
-.text-error { color: var(--error); }
-.text-info { color: var(--info); }
-
-.mt-4 { margin-top: 1rem; }
-.mr-2 { margin-right: 0.5rem; }
-.mb-2 { margin-bottom: 0.5rem; }
-
-/* Theme Toggle */
-.theme-toggle {
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  cursor: pointer;
-  font-size: 1.25rem;
-  margin-left: 1rem;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-
-::-webkit-scrollbar-thumb {
-  background: #c1c9d2;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #a8b3c0;
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-  .grid-4 {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-    width: 80px;
-  }
-  
-  .sidebar-header, .sidebar-item span {
-    display: none;
-  }
-  
-  .sidebar-item {
-    padding: 0.75rem;
-    justify-content: center;
-  }
-  
-  .sidebar-item i {
-    margin-right: 0;
-    font-size: 1.25rem;
-  }
-  
-  .grid-2, .grid-3, .grid-4 {
-    grid-template-columns: 1fr;
-  }
-  
-  .content-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-}
-</style>
-</head>
-<body data-theme="light">
-
-<div class="app-container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="sidebar-group">
-            <div class="sidebar-header">NAVIGATION</div>
-            <a href="#" class="sidebar-item active">
-                <i class="fas fa-home"></i> <span>Dashboard</span>
-            </a>
-            <a href="#" class="sidebar-item">
-                <i class="fas fa-calendar"></i> <span>Bookings</span>
-            </a>
-            <a href="#" class="sidebar-item">
-                <i class="fas fa-users"></i> <span>Translators</span>
-            </a>
-            <a href="#" class="sidebar-item">
-                <i class="fas fa-building"></i> <span>Clients</span>
-            </a>
-        </div>
+    <title>Translation Booking Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
-        <div class="sidebar-group">
-            <div class="sidebar-header">MANAGE</div>
-            <a href="#" class="sidebar-item">
-                <i class="fas fa-gavel"></i> <span>Tenders</span>
-            </a>
-            <a href="#" class="sidebar-item">
-                <i class="fas fa-file-contract"></i> <span>Contracts</span>
-            </a>
-            <a href="#" class="sidebar-item">
-                <i class="fas fa-money-bill-wave"></i> <span>Invoices</span>
-            </a>
-            <a href="#" class="sidebar-item">
-                <i class="fas fa-chart-line"></i> <span>Reports</span>
-            </a>
-        </div>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
         
-        <div class="sidebar-group">
-            <div class="sidebar-header">SETTINGS</div>
-            <a href="#" class="sidebar-item">
-                <i class="fas fa-cog"></i> <span>Preferences</span>
-            </a>
-            <a href="#" class="sidebar-item">
-                <i class="fas fa-palette"></i> <span>Themes</span>
-            </a>
-            <a href="#" class="sidebar-item">
-                <i class="fas fa-question-circle"></i> <span>Help</span>
-            </a>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: #2563eb;
+            color: white;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            margin-right: 0.5rem;
+        }
+        
+        .btn:hover {
+            background: #1d4ed8;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-confirmed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Translation Booking Platform</h1>
         </div>
-    </div>
+    </header>
 
-    <!-- Content Area -->
-    <div class="content-area">
-        <!-- Toolbar -->
-        <div class="toolbar">
-            <h1><i class="fas fa-language"></i> Translators Pro</h1>
-            <div class="toolbar-actions">
-                <button class="btn btn-secondary">
-                    <i class="fas fa-bell"></i>
-                </button>
-                <button class="btn btn-primary">
-                    <i class="fas fa-plus"></i> New Booking
-                </button>
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                </button>
+    <div class="container">
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Active Bookings</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24</div>
+                <div class="stat-label">Available Translators</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Pending Requests</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">86.5K</div>
+                <div class="stat-label">Revenue (SEK)</div>
             </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <div class="content-header">
-                <h2>Translation Dashboard</h2>
-                <div>
-                    <button class="btn btn-secondary">
-                        <i class="fas fa-download"></i> Export
-                    </button>
-                </div>
-            </div>
-
-            <!-- Stats Overview -->
-            <div class="grid-4 mb-2">
-                <div class="card">
-                    <div class="card-body">
-                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <div>
-                                <div style="color: var(--text-secondary); font-size: 0.875rem;">Active Bookings</div>
-                                <div style="font-size: 1.875rem; font-weight: 700;">12</div>
-                            </div>
-                            <div style="background: #E0F2FE; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-calendar-check" style="color: #0EA5E9; font-size: 1.5rem;"></i>
-                            </div>
+        <div class="grid">
+            <!-- Booking Form -->
+            <div class="card">
+                <div class="card-header">New Booking Request</div>
+                <div class="card-body">
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <label for="client">Client Name</label>
+                            <input type="text" id="client" name="client" required>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-body">
-                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <div>
-                                <div style="color: var(--text-secondary); font-size: 0.875rem;">Available Translators</div>
-                                <div style="font-size: 1.875rem; font-weight: 700;">24</div>
-                            </div>
-                            <div style="background: #D1FAE5; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-users" style="color: #10B981; font-size: 1.5rem;"></i>
-                            </div>
+                        
+                        <div class="form-group">
+                            <label for="languages">Language Pair</label>
+                            <select id="languages" name="languages" required>
+                                <option value="">Select languages</option>
+                                <option value="en-sv">English ↔ Swedish</option>
+                                <option value="ar-sv">Arabic ↔ Swedish</option>
+                                <option value="so-sv">Somali ↔ Swedish</option>
+                                <option value="es-sv">Spanish ↔ Swedish</option>
+                            </select>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-body">
-                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <div>
-                                <div style="color: var(--text-secondary); font-size: 0.875rem;">Pending Tenders</div>
-                                <div style="font-size: 1.875rem; font-weight: 700;">5</div>
-                            </div>
-                            <div style="background: #FEF3C7; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-gavel" style="color: #F59E0B; font-size: 1.5rem;"></i>
-                            </div>
+                        
+                        <div class="form-group">
+                            <label for="type">Service Type</label>
+                            <select id="type" name="type" required>
+                                <option value="">Select type</option>
+                                <option value="legal">Legal</option>
+                                <option value="medical">Medical</option>
+                                <option value="business">Business</option>
+                                <option value="general">General</option>
+                            </select>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-body">
-                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <div>
-                                <div style="color: var(--text-secondary); font-size: 0.875rem;">Revenue (SEK)</div>
-                                <div style="font-size: 1.875rem; font-weight: 700;">86.5K</div>
-                            </div>
-                            <div style="background: #E0F2FE; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-money-bill-wave" style="color: #2563EB; font-size: 1.5rem;"></i>
-                            </div>
+                        
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" name="date" required>
                         </div>
-                    </div>
+                        
+                        <div class="form-group">
+                            <label for="time">Time</label>
+                            <input type="time" id="time" name="time" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="duration">Duration (hours)</label>
+                            <input type="number" id="duration" name="duration" min="1" value="2" required>
+                        </div>
+                        
+                        <button type="submit" class="btn">Submit Request</button>
+                        <button type="reset" class="btn btn-secondary">Clear</button>
+                    </form>
                 </div>
             </div>
 
             <!-- Recent Bookings -->
             <div class="card">
-                <div class="card-header">
-                    <span>Recent Bookings</span>
-                    <button class="btn btn-sm btn-secondary">View All</button>
-                </div>
+                <div class="card-header">Recent Bookings</div>
                 <div class="card-body">
-                    <table class="table">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Client</th>
-                                <th>Translator</th>
-                                <th>Language Pair</th>
-                                <th>Date & Time</th>
-                                <th>Type</th>
+                                <th>Languages</th>
+                                <th>Date</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Stockholm Law AB</td>
-                                <td>Ahmed Mansour</td>
                                 <td>Arabic ↔ Swedish</td>
-                                <td>Sep 10, 2023 · 10:00-12:00</td>
-                                <td>Legal Meeting</td>
-                                <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                                <td>Sep 10, 2023</td>
+                                <td><span class="status status-confirmed">Confirmed</span></td>
                             </tr>
                             <tr>
                                 <td>Karolinska Hospital</td>
-                                <td>Lisa Berg</td>
-                                <td>Swedish ↔ English</td>
-                                <td>Sep 12, 2023 · 14:00-16:00</td>
-                                <td>Medical</td>
-                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>English ↔ Swedish</td>
+                                <td>Sep 12, 2023</td>
+                                <td><span class="status status-pending">Pending</span></td>
                             </tr>
                             <tr>
                                 <td>Migrationsverket</td>
-                                <td>Omar Ali</td>
                                 <td>Arabic ↔ Swedish</td>
-                                <td>Sep 15, 2023 · 09:00-11:00</td>
-                                <td>Legal Document</td>
-                                <td><span class="status-badge status-completed">Completed</span></td>
-                            </tr>
-                            <tr>
-                                <td>Ericsson AB</td>
-                                <td>Emma Johansson</td>
-                                <td>English ↔ Swedish</td>
-                                <td>Sep 18, 2023 · 13:00-15:00</td>
-                                <td>Technical</td>
-                                <td><span class="status-badge status-urgent">Urgent</span></td>
+                                <td>Sep 15, 2023</td>
+                                <td><span class="status status-confirmed">Confirmed</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
 
-            <div class="grid-2">
-                <!-- Available Translators -->
-                <div class="card">
-                    <div class="card-header">
-                        <span>Available Translators</span>
-                        <button class="btn btn-sm btn-secondary">Filter</button>
-                    </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Specialization</th>
-                                    <th>Languages</th>
-                                    <th>Rate (SEK/h)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Ahmed Mansour</td>
-                                    <td>Legal</td>
-                                    <td>AR ↔ SV</td>
-                                    <td>850</td>
-                                </tr>
-                                <tr>
-                                    <td>Lisa Berg</td>
-                                    <td>Medical</td>
-                                    <td>EN ↔ SV</td>
-                                    <td>750</td>
-                                </tr>
-                                <tr>
-                                    <td>Omar Ali</td>
-                                    <td>General</td>
-                                    <td>AR ↔ SV</td>
-                                    <td>500</td>
-                                </tr>
-                                <tr>
-                                    <td>Emma Johansson</td>
-                                    <td>Technical</td>
-                                    <td>EN ↔ SV</td>
-                                    <td>800</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Recent Tenders -->
-                <div class="card">
-                    <div class="card-header">
-                        <span>Active Tenders</span>
-                        <button class="btn btn-sm btn-secondary">View All</button>
-                    </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Client</th>
-                                    <th>Category</th>
-                                    <th>Deadline</th>
-                                    <th>Value</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Migrationsverket</td>
-                                    <td>Legal</td>
-                                    <td>Sep 15, 2023</td>
-                                    <td>70,000 SEK</td>
-                                </tr>
-                                <tr>
-                                    <td>Karolinska Hospital</td>
-                                    <td>Medical</td>
-                                    <td>Sep 20, 2023</td>
-                                    <td>45,000 SEK</td>
-                                </tr>
-                                <tr>
-                                    <td>Stockholm Court</td>
-                                    <td>Legal</td>
-                                    <td>Sep 25, 2023</td>
-                                    <td>62,000 SEK</td>
-                                </tr>
-                                <tr>
-                                    <td>Ericsson AB</td>
-                                    <td>Technical</td>
-                                    <td>Oct 01, 2023</td>
-                                    <td>88,000 SEK</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quick Booking Form -->
-            <div class="card">
-                <div class="card-header">Quick Booking</div>
-                <div class="card-body">
-                    <div class="grid-3">
-                        <div class="form-group">
-                            <label for="client">Client</label>
-                            <select id="client">
-                                <option value="">Select Client</option>
-                                <option value="stockholm-law">Stockholm Law AB</option>
-                                <option value="karolinska">Karolinska Hospital</option>
-                                <option value="migrationsverket">Migrationsverket</option>
-                                <option value="ericsson">Ericsson AB</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="language-pair">Language Pair</label>
-                            <select id="language-pair">
-                                <option value="">Select Languages</option>
-                                <option value="ar-sv">Arabic ↔ Swedish</option>
-                                <option value="en-sv">English ↔ Swedish</option>
-                                <option value="so-sv">Somali ↔ Swedish</option>
-                                <option value="es-sv">Spanish ↔ Swedish</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="specialization">Specialization</label>
-                            <select id="specialization">
-                                <option value="">Select Type</option>
-                                <option value="legal">Legal</option>
-                                <option value="medical">Medical</option>
-                                <option value="technical">Technical</option>
-                                <option value="business">Business</option>
-                                <option value="general">General</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="date">Date</label>
-                            <input type="date" id="date">
-                        </div>
-                        <div class="form-group">
-                            <label for="time">Time</label>
-                            <input type="time" id="time">
-                        </div>
-                        <div class="form-group">
-                            <label for="duration">Duration (hours)</label>
-                            <input type="number" id="duration" min="1" value="2">
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-search"></i> Find Translators
-                        </button>
-                        <button class="btn btn-secondary">
-                            <i class="fas fa-times"></i> Clear
-                        </button>
-                    </div>
-                </div>
+        <!-- Available Translators -->
+        <div class="card">
+            <div class="card-header">Available Translators</div>
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Languages</th>
+                            <th>Specialization</th>
+                            <th>Rate (SEK/h)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ahmed Mansour</td>
+                            <td>Arabic ↔ Swedish</td>
+                            <td>Legal</td>
+                            <td>850</td>
+                        </tr>
+                        <tr>
+                            <td>Lisa Berg</td>
+                            <td>English ↔ Swedish</td>
+                            <td>Medical</td>
+                            <td>750</td>
+                        </tr>
+                        <tr>
+                            <td>Omar Ali</td>
+                            <td>Arabic ↔ Swedish</td>
+                            <td>General</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Emma Johansson</td>
+                            <td>English ↔ Swedish</td>
+                            <td>Technical</td>
+                            <td>800</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    // Theme Toggle Functionality
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = themeToggle.querySelector('i');
-    
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = document.body.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
-        document.body.setAttribute('data-theme', newTheme);
-        
-        if (newTheme === 'dark') {
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        } else {
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
-        }
-        
-        // Save theme preference to localStorage
-        localStorage.setItem('theme', newTheme);
-    });
-    
-    // Check for saved theme preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        document.body.setAttribute('data-theme', savedTheme);
-        if (savedTheme === 'dark') {
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        }
-    }
-    
-    // Sidebar item selection
-    document.addEventListener('DOMContentLoaded', function() {
-        const sidebarItems = document.querySelectorAll('.sidebar-item');
-        sidebarItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                sidebarItems.forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-            });
+    <script>
+        // Simple form handling
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Booking request submitted successfully!');
+            this.reset();
         });
-        
-        // Button interactions
-        const buttons = document.querySelectorAll('.btn:not(#themeToggle)');
-        buttons.forEach(button => {
-            button.addEventListener('click', function() {
-                this.style.transform = 'scale(0.98)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 150);
-            });
-        });
-    });
-</script>
 
+        // Set minimum date to today
+        document.getElementById('date').min = new Date().toISOString().split('T')[0];
+    </script>
 </body>
 </html>

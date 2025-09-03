@@ -1,0 +1,37 @@
+# Terminal Aliases for Tauri Admin Theme Development
+
+# Quick navigation
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Git shortcuts
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline'
+alias gd='git diff'
+
+# Development server shortcuts
+alias serve='python3 -m http.server 8000'
+alias serve-alt='python -m SimpleHTTPServer 8000'
+
+# File operations
+alias ..='cd ..'
+alias ...='cd ../..'
+alias grep='grep --color=auto'
+
+# Project specific
+alias theme='cd /Users/mansour/Documents/GitHub/tauri-admin-theme'
+alias open-theme='open index.html'
+
+# Quick edit
+alias edit='code .'
+alias vi='vim'
+
+# Utility
+alias myip='curl http://ipecho.net/plain; echo'
+alias path='echo -e ${PATH//:/\\n}'
+
+echo "Tauri Admin Theme aliases loaded successfully!"
